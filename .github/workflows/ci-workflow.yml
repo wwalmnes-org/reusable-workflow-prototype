@@ -9,6 +9,9 @@ on:
       pack:
         required: true
         type: boolean
+      shallFail:
+        required: false
+        type: boolean
 
 jobs:
   reusable-workflow:
@@ -27,5 +30,6 @@ jobs:
       run: echo "packing library"
 
     # Comment out if want to test with the reusable workflow failing.
-    # - name: Try to fail
-    #   run: exit 1
+    - name: Try to fail
+      if: ${{ inputs.shallFail }}
+      run: exit 1
